@@ -23,31 +23,35 @@ function getHeaders(myURL) {
     });
 }
 
-// getHeaders(
-//     "https://stackoverflow.com/questions/5922842/getting-http-headers-with-node-js"
-// ).then((headers) => {
-//     console.log(headers);
-// });
-
 http.createServer((req, res) => {
+    const headers = {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'OPTIONS, POST, GET',
+        'Access-Control-Max-Age': 2592000, // 30 days
+        /** add other headers as per requirement */
+    };
     if (req.method == 'POST') {
         whole = ''
         req.on('data', (chunk) => {
-
-            // consider adding size limit here
             whole += chunk.toString()
         })
-
         req.on('end', () => {
             let jsondata = JSON.parse(whole)
-            res.writeHead(200, 'OK', {
-                'Content-Type': 'application/json'
-            })
+            console.log(jsondata)
+
             getHeaders(
                 jsondata.url
             ).then((headers) => {
+                res.writeHead(200, 'OK', {
+                    'Content-Type': 'application/json'
+                })
+                console.log('found');
                 res.end(JSON.stringify(headers))
             }).catch(err => {
+                console.log('not found')
+                res.writeHead(404, 'Not found', {
+                    'Content-Type': 'application/json'
+                })
                 res.end(JSON.stringify(err))
             });
         })
