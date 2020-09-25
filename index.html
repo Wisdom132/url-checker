@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>URL Validator</title>
+    <style>
+        body {
+            background-color: #f2f4f8
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    Url Validator
+                </a>
+            </div>
+
+        </nav>
+        <section class="mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card px-3 py-5">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Enter Url</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp">
+                                    <small id="emailHelp" class="form-text text-muted">Validation of URL can take few
+                                        seconds.</small>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Validate</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="client.js"></script>
+</body>
+
+</html>
