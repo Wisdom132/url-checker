@@ -22,14 +22,13 @@ var app = new Vue({
             }).then(response => {
                 this.loading = false
                 window.open(this.url, '_blank')
-            }).catch(function (e) {
+            }).catch(e => {
                 Swal.fire({
                     title: 'Error!',
                     text: 'URL does not exist',
                     icon: 'error',
                 })
                 this.loading = false
-                console.log(e);
             });
 
 
