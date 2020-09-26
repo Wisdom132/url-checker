@@ -20,7 +20,12 @@ var app = new Vue({
             fetch(myRequest).then(function (response) {
                 return response;
             }).then(response => {
-                this.loading = false
+                this.loading = false;
+                var now = new Date();
+                now.setMonth(now.getMonth() + 1);
+                let cookievalue = Math.random() + ";"
+                document.cookie = "name=" + cookievalue;
+                document.cookie = "expires=" + now.toUTCString() + ";"
                 window.open(this.url, '_blank')
             }).catch(e => {
                 Swal.fire({
