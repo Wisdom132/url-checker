@@ -2,11 +2,12 @@ var app = new Vue({
     el: '#app',
     data: {
         url: '',
+        loading: false,
         message: 'Hello Vue!'
     },
     methods: {
-
-        checkURL() {
+        async checkURL() {
+            this.loading = true
             fetch("http://localhost:8080", {
                     method: "POST",
                     mode: 'no-cors',
@@ -14,15 +15,21 @@ var app = new Vue({
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
                     },
-                    // Adding body or contents to send 
                     body: JSON.stringify({
                         url: this.url,
                     }),
                 })
 
-                .then(response => response.json())
-                .then(json => console.log(json))
-                .catch(err => console.log(err))
+                .then(response => {
+                    this.loading = false
+                    window.open(this.url, '_blank');
+                    console.log(response)
+                })
+
+                .catch(err => {
+                    this.loading = false
+                    console.log(err)
+                })
         }
     }
 })

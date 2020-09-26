@@ -31,13 +31,13 @@ http.createServer((req, res) => {
         /** add other headers as per requirement */
     };
     if (req.method == 'POST') {
+        console.log('called')
         whole = ''
         req.on('data', (chunk) => {
             whole += chunk.toString()
         })
         req.on('end', () => {
             let jsondata = JSON.parse(whole)
-            console.log(jsondata)
 
             getHeaders(
                 jsondata.url
@@ -45,8 +45,8 @@ http.createServer((req, res) => {
                 res.writeHead(200, 'OK', {
                     'Content-Type': 'application/json'
                 })
-                console.log('found');
-                res.end(JSON.stringify(headers))
+                res.write(JSON.stringify(headers))
+                res.end()
             }).catch(err => {
                 console.log('not found')
                 res.writeHead(404, 'Not found', {
