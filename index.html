@@ -34,7 +34,7 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Enter Url</label>
                                     <input v-model="url" type="text" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp">
+                                        aria-describedby="emailHelp" required>
                                     <small id="emailHelp" class="form-text text-muted">Validation of URL can take few
                                         seconds.</small>
                                 </div>
@@ -54,6 +54,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script src="client.js"></script>
 </body>

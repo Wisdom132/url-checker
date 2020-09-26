@@ -40,20 +40,21 @@ http.createServer((req, res) => {
             let jsondata = JSON.parse(whole)
 
             getHeaders(
-                jsondata.url
-            ).then((headers) => {
-                res.writeHead(200, 'OK', {
-                    'Content-Type': 'application/json'
+                    jsondata.url
+                ).then((headers) => {
+                    res.writeHead(200, 'OK', {
+                        'Content-Type': 'application/json'
+                    })
+                    res.write(JSON.stringify(headers))
+                    res.end()
                 })
-                res.write(JSON.stringify(headers))
-                res.end()
-            }).catch(err => {
-                console.log('not found')
-                res.writeHead(404, 'Not found', {
-                    'Content-Type': 'application/json'
-                })
-                res.end(JSON.stringify(err))
-            });
+                .catch(err => {
+                    console.log('not found')
+                    res.writeHead(500, 'Not found', {
+                        'Content-Type': 'application/json'
+                    })
+                    res.send(JSON.stringify(err))
+                });
         })
     }
 }).listen(8080)

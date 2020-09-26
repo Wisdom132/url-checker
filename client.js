@@ -6,30 +6,48 @@ var app = new Vue({
         message: 'Hello Vue!'
     },
     methods: {
+
         async checkURL() {
             this.loading = true
-            fetch("http://localhost:8080", {
-                    method: "POST",
-                    mode: 'no-cors',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        url: this.url,
-                    }),
-                })
+            const testURL = this.url;
+            const myInit = {
+                method: 'HEAD',
+                mode: 'no-cors',
+            };
 
-                .then(response => {
-                    this.loading = false
-                    window.open(this.url, '_blank');
-                    console.log(response)
-                })
+            const myRequest = new Request(testURL, myInit);
 
-                .catch(err => {
-                    this.loading = false
-                    console.log(err)
+            fetch(myRequest).then(function (response) {
+                return response;
+            }).then(response => {
+                this.loading = false
+                window.open(this.url, '_blank')
+            }).catch(function (e) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'URL does not exist',
+                    icon: 'error',
                 })
+                this.loading = false
+                console.log(e);
+            });
+
+
+            // fetch("http://localhost:8080", {
+            //         method: "POST",
+            //         mode: 'no-cors',
+            //         headers: {
+            //             'Accept': 'application/json',
+            //             'Content-Type': 'application/json'
+            //         },
+            //         body: JSON.stringify({
+            //             url: this.url,
+            //         }),
+            //     })
+
+            //     .then(response => response.json())
+            //     .then(json => console.log(json))
+            //     .catch(err => console.log(err))
         }
     }
 })
