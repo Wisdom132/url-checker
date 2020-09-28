@@ -33,7 +33,8 @@ var app = new Vue({
           document.cookie = "name=" + cookievalue;
           document.cookie = "expires=" + now.toUTCString() + ";";
           console.log(response);
-          window.open(this.url, "_blank");
+          window.location.replace(this.url);
+          // window.open(this.url, "_blank");
         }
       }).catch((e) => {
         Swal.fire({
